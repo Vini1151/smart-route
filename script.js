@@ -4,7 +4,7 @@ const cities = [
     "Solapur", "Jalna", "Amravati", "Nanded", "Nagpur"
 ];
 
-// Graph (same 9×9 matrix)
+// Graph (9x9 matrix)
 const graph = [
     [0, 150, 170, 410, 0, 210, 0, 0, 0],
     [150, 0, 210, 230, 250, 0, 0, 0, 0],
@@ -17,7 +17,8 @@ const graph = [
     [0, 0, 0, 0, 0, 470, 155, 327, 0]
 ];
 
-// Fill dropdowns
+const API_URL = "https://smart-route.onrender.com";
+
 const sourceSelect = document.getElementById("source");
 const destSelect = document.getElementById("dest");
 
@@ -26,7 +27,7 @@ cities.forEach((city, index) => {
     destSelect.innerHTML += `<option value="${index}">${city}</option>`;
 });
 
-// Function to send data to C
+destSelect.value = 8;
 async function findRoute() {
     let src = sourceSelect.value;
     let dest = destSelect.value;
@@ -37,28 +38,29 @@ async function findRoute() {
         return;
     }
 
-    // Convert JS data → C input format
+    document.getElementById("output").innerText = "⏳ Finding route...";
+
     let input = "";
-
     input += cities.length + "\n";
-
     input += cities.join(" ") + "\n";
-
     graph.forEach(row => {
         input += row.join(" ") + "\n";
     });
-
     input += src + " " + dest;
 
-    // Send to backend
-    const res = await fetch("/route", {
-        method: "POST",
-        headers: {
-            "Content-Type": "text/plain"
-        },
-        body: input
-    });
+    try {
+        const res = await fetch(`${API_URL}/route`, {
+            method: "POST",
+            headers: { "Content-Type": "text/plain" },
+            body: input
+        });
 
-    const data = await res.text();
-    document.getElementById("output").innerText = data;
+        if (!res.ok) throw new Error("Server error");
+
+        const data = await res.text();
+        document.getElementById("output").innerText = data;
+    } catch (err) {
+        document.getElementById("output").innerText =
+            "❌ Could not connect to server. Please try again.";
+    }
 }
