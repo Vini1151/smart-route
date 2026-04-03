@@ -17,7 +17,7 @@ const graph = [
     [0, 0, 0, 0, 0, 470, 155, 327, 0]
 ];
 
-const API_URL = "https://smart-route.onrender.com";
+const API_URL = "https://smart-route-ssir.onrender.com";
 
 const sourceSelect = document.getElementById("source");
 const destSelect = document.getElementById("dest");
