@@ -1,11 +1,12 @@
 {
   "name": "smart-route",
   "version": "1.0.0",
-  "description": "",
+  "description": "Web-based shortest path visualizer using Dijkstra's algorithm",
   "main": "server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node server.js"
+    "build": "gcc dijkstra.c -o dijkstra",
+    "start": "node server.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
   "author": "",
