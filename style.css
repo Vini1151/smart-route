@@ -59,6 +59,23 @@ button {
 button:hover {
     background: #3367d6;
 }
+#map {
+  height: 420px;
+  width: 100%;
+  border-radius: 12px;
+  margin-top: 20px;
+  border: 1px solid #ddd;
+  z-index: 0;
+}
+
+.leaflet-tooltip {
+  font-size: 12px;
+  font-weight: 500;
+  background: rgba(255,255,255,0.9);
+  border: none;
+  box-shadow: none;
+  padding: 2px 6px;
+}
 
 .result {
     margin-top: 20px;
