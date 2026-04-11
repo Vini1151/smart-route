@@ -156,6 +156,7 @@ async function findRoute() {
 
         const data = await res.text();
         document.getElementById("output").innerText = data;
+        drawRouteOnMap(data);
     } catch (err) {
         document.getElementById("output").innerText =
             "❌ Could not connect to server. Please try again.";
